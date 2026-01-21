@@ -15,8 +15,8 @@ def parse_json(data):
 def get_item_by_id(id):
     try:
         db = MongoDBManager.get_db()
-        # Buscamos en la colección específica tn_integrador_erp
-        item = db.tn_integrador_erp.find_one({"_id": ObjectId(id)})
+        # Buscamos en la colección específica tn_integrador_erp2222
+        item = db.tn_integrador_erp2222.find_one({"_id": ObjectId(id)})
         
         if item:
             return jsonify(parse_json(item)), 200
@@ -28,7 +28,7 @@ def get_item_by_id(id):
 @ops_bp.route('/erp', methods=['GET'])
 def get_all_items():
     db = MongoDBManager.get_db()
-    items = list(db.tn_integrador_erp.find().limit(50))
+    items = list(db.tn_integrador_erp2222.find().limit(50))
     return jsonify(parse_json(items)), 200
 
 # 3. INSERTAR (Create)
@@ -41,9 +41,9 @@ def insert_item():
         if not data:
             return jsonify({"error": "Cuerpo de solicitud vacío"}), 400
             
-        result = db.tn_integrador_erp.insert_one(data)
+        result = db.tn_integrador_erp2222.insert_one(data)
         return jsonify({
-            "message": "Registro creado en tn_integrador_erp",
+            "message": "Registro creado en tn_integrador_erp2222",
             "inserted_id": str(result.inserted_id)
         }), 201
     except Exception as e:
@@ -54,7 +54,7 @@ def insert_item():
 def delete_item(id):
     try:
         db = MongoDBManager.get_db()
-        result = db.tn_integrador_erp.delete_one({"_id": ObjectId(id)})
+        result = db.tn_integrador_erp2222.delete_one({"_id": ObjectId(id)})
         
         if result.deleted_count > 0:
             return jsonify({"message": f"Registro {id} eliminado correctamente"}), 200
